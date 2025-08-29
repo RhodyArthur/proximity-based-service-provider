@@ -27,6 +27,15 @@
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
+  "lint-staged": {
+  "*.{ts,tsx}": [
+    "eslint --fix",
+    "prettier --write"
+  ],
+  "*.{html,scss,css,json,md}": [
+    "prettier --write"
+  ]
+},
   "devDependencies": {
     "@angular/build": "^20.0.0",
     "@angular/cli": "^20.0.0",
