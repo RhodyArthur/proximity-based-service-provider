@@ -4,11 +4,11 @@ import Aura from '@primeuix/themes/aura';
 const MyPreset = definePreset(Aura, {
   semantic: {
     primary: {
-      50: '#0B4777',
+      50: '#2196f3',
       100: '#424242',
       200: '#82b1ff',
       300: '#ff5252',
-      400: '#2196f3',
+      400: '#0B4777',
       500: '#4caf50',
       600: '#ffc107',
       700: '#475467',
