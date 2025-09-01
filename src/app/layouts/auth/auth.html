@@ -17,11 +17,8 @@
       </div>
 
       <div class="review">
-        <p>
-          "Great platform to connect with service providers. I found a reliable plumber within
-          minutes!"
-        </p>
-        <span>~ Jane Doe</span>
+        <p>{{ reviews[currentReview].text }}</p>
+        <span>{{reviews[currentReview].author}}</span>
       </div>
     </div>
 
@@ -32,9 +29,13 @@
       </div>
 
       <div class="indicators">
-        <div class="indicator active"></div>
-        <div class="indicator"></div>
-        <div class="indicator"></div>
+        @for (review of reviews; track $index) {
+        <div
+          class="indicator"
+          [class.active]="currentReview === $index"
+          (click)="goToReview($index)"
+        ></div>
+        }
       </div>
     </div>
   </section>
