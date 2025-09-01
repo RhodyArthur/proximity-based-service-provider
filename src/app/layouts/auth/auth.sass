@@ -1,0 +1,117 @@
+@use './../../styles/_mixins' as *
+@use './../../styles/_variables' as *
+@use './../../styles/_typography' as *
+@use './../../styles/_function' as *
+
+main
+    @include flex-option(flex, space-between, flex-start, column-reverse)
+    width: 100%
+    height: 100%
+
+    .left, .right
+        width: 100%
+        height: 100vh
+
+    .left
+        @include flex-option(flex, flex-start, flex-start, column)
+        background-color: white
+
+        .logo
+            @include flex-option(flex, space-between, center, row)
+            gap: 0.5rem
+            padding: 1rem 2.5rem
+
+            p
+                font-size: 1rem
+                font-weight: 600
+                color: black
+                text-transform: uppercase
+
+        .container
+            @include flex-option(flex, center, center, column)
+            width: 100%
+            height: 100%
+
+            ng-content
+                width: 100%
+                
+
+    .right
+        @include flex-option(flex, space-between, center, column)
+        background-color: $primary
+        padding-block: 2rem
+
+        .carousel
+            @include flex-option(flex, center, center, column)
+            height: 100%
+            position: relative
+
+            .review
+                @include flex-option(flex, flex-start, flex-start, column)
+                gap: 0.5rem
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)
+                text-align: center
+                width: 80%
+
+                p
+                    color: white
+                    font-size: 1.25rem
+                    line-height: 1.2
+                    font-weight: 600
+
+                span
+                    color: $info
+                    text-align: left
+                    font-style: italic
+
+
+            .outer-circle
+                width: pxToRem(300)
+                height: pxToRem(300)
+                background: linear-gradient(180deg, #405e8b 0%, #06459e 56%)
+                border-radius: 50%
+                @include flex-option(flex, center, center, column)
+
+                .inner-circle
+                    width: pxToRem(250)
+                    height: pxToRem(250)
+                    background: linear-gradient(180deg, #5984c6 0%, #3d6eb9 19%)
+                    border-radius: 50%
+                    @include flex-option(flex, center, center, column)
+            
+
+        .text-indicators
+            @include flex-option(flex, center, center, column)
+            gap: pxToRem(55)
+            
+
+        .text-container
+            @include flex-option(flex, center, center, column)
+            gap: 0.5rem
+            text-align: center
+
+            p
+                color: white
+                @extend .body-b1
+
+            span
+                @extend .body-b3
+                color: $blue
+
+        .indicators
+            @include flex-option(flex, center, center, row)
+            gap: 0.5rem
+            margin-top: 1rem
+
+            .indicator
+                width: 0.625rem
+                height: 0.625rem
+                border-radius: 50%
+                background-color: $blue
+
+                &.active
+                    background-color: white
+
