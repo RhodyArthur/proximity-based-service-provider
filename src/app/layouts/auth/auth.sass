@@ -2,6 +2,7 @@
 @use './../../styles/_variables' as *
 @use './../../styles/_typography' as *
 @use './../../styles/_function' as *
+@use './../../styles/_breakpoints' as *
 
 main
     @include flex-option(flex, space-between, flex-start, column-reverse)
@@ -123,3 +124,48 @@ main
                 &.active
                     background-color: white
 
+
+@include mq(tablet)
+    main
+        flex-direction: row
+
+        .left, .right
+            width: 50%
+
+        .right
+            .carousel
+                .review
+                    p
+                        font-size: 1.5rem
+
+                .outer-circle
+                    width: pxToRem(350)
+                    height: pxToRem(350)
+
+                    .inner-circle
+                        width: pxToRem(300)
+                        height: pxToRem(300)
+
+@include mq(laptop)
+    main
+        .right
+            .carousel
+                .outer-circle
+                    width: pxToRem(428)
+                    height: pxToRem(428)
+
+                    .inner-circle
+                        width: pxToRem(378)
+                        height: pxToRem(378)
+
+@include mq(desktop)
+    main
+        .right
+            .carousel
+                .outer-circle
+                    width: pxToRem(535)
+                    height: pxToRem(535)
+
+                    .inner-circle
+                        width: pxToRem(428)
+                        height: pxToRem(428)
