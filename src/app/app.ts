@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { Auth } from './layouts/auth/auth';
 
 @Component({
   selector: 'app-root',
-  imports: [Auth],
+  imports: [],
   templateUrl: './app.html',
   styleUrl: './app.sass',
 })
