@@ -1,5 +1,10 @@
 <app-auth>
   <main class="flex flex-col gap-8 p-4" auth-content>
+    <div class="flex items-center gap-2" (click)="goBack()">
+      <i class="fa-solid fa-arrow-left" style="color: #0b4777"></i>
+      <p class="text-blue-900">Back</p>
+    </div>
+
     <header class="flex flex-col">
       <h1 class="text-3xl text-black font-semibold">Register as a Provider</h1>
       <p class="text-gray-500 dark:text-gray-400">Agree to the terms and conditions</p>

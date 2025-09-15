@@ -20,4 +20,18 @@ export const authRoutes: Routes = [
     loadComponent: () =>
       import('./pages/client-register/client-register').then((m) => m.ClientRegister),
   },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login').then((m) => m.Login),
+  },
+  {
+    path: 'forgot-password',
+    loadComponent: () =>
+      import('./pages/forgot-password/forgot-password').then((m) => m.ForgotPassword),
+  },
+  {
+    path: 'password-reset',
+    loadComponent: () =>
+      import('./pages/password-reset/password-reset').then((m) => m.PasswordReset),
+  },
 ];

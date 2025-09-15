@@ -33,7 +33,7 @@ export class RoleSelection {
 
   navigateToNext() {
     if (this.selectedRole() === 'client') {
-      this.router.navigate(['/']);
+      this.router.navigate(['/auth/client-registration']);
     } else if (this.selectedRole() === 'provider') {
       this.router.navigate(['/auth/provider-agreement']);
     }

@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { passwordStructureValidator } from '@shared/validators/passwordStructure';
 import { passwordMatchValidator } from '@shared/validators/passwordMatch';
 import { getControlErrorMessage } from '@shared/utils/validator-messages';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-provider-register',
@@ -15,6 +16,7 @@ import { getControlErrorMessage } from '@shared/utils/validator-messages';
 })
 export class ProviderRegister {
   private fb = inject(FormBuilder);
+  private location = inject(Location);
 
   registerForm: FormGroup = this.fb.group(
     {
@@ -29,5 +31,9 @@ export class ProviderRegister {
   getError(controlName: string): string | null {
     const control = this.registerForm.get(controlName);
     return getControlErrorMessage(control);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
