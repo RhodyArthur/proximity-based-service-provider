@@ -15,4 +15,9 @@ export const authRoutes: Routes = [
     loadComponent: () =>
       import('./pages/provider-register/provider-register').then((m) => m.ProviderRegister),
   },
+  {
+    path: 'client-registration',
+    loadComponent: () =>
+      import('./pages/client-register/client-register').then((m) => m.ClientRegister),
+  },
 ];
