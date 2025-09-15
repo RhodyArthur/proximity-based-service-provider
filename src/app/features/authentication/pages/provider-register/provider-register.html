@@ -7,37 +7,61 @@
       </p>
     </header>
 
-    <form class="flex flex-col gap-8">
+    <form class="flex flex-col gap-8" [formGroup]="registerForm">
       <section class="flex flex-col gap-4">
-        <app-input-field
-          label="Business Name"
-          type="text"
-          placeholder="Lazo Washing Bay"
-          prefixIcon="fas fa-user"
-        />
+        <div class="relative">
+          <app-input-field
+            label="Business Name"
+            type="text"
+            placeholder="Lazo Washing Bay"
+            prefixIcon="fas fa-user"
+            formControlName="businessName"
+          />
+          <small class="block text-sm text-red-700 absolute top-0 right-0"
+            >{{getError('businessName')}}</small
+          >
+        </div>
 
-        <app-input-field
-          label="Business Email"
-          type="email"
-          placeholder="you@example.com"
-          prefixIcon="fas fa-envelope"
-        />
+        <div class="relative">
+          <app-input-field
+            label="Business Email"
+            type="email"
+            placeholder="you@example.com"
+            prefixIcon="fas fa-envelope"
+            formControlName="businessEmail"
+          />
+          <small class="block text-sm text-red-700 absolute top-0 right-0"
+            >{{getError('businessEmail')}}</small
+          >
+        </div>
 
-        <app-input-field
-          label="Password"
-          type="password"
-          placeholder="●●●●●●●●●"
-          prefixIcon="fas fa-lock"
-          suffixIcon="eye"
-        />
+        <div class="relative">
+          <app-input-field
+            label="Password"
+            type="password"
+            placeholder="●●●●●●●●●"
+            prefixIcon="fas fa-lock"
+            suffixIcon="eye"
+            formControlName="password"
+          />
+          <small class="block text-sm text-red-700 absolute top-0 right-0"
+            >{{getError('password')}}</small
+          >
+        </div>
 
-        <app-input-field
-          label="Confirm Password"
-          type="password"
-          placeholder="●●●●●●●●●"
-          prefixIcon="fas fa-lock"
-          suffixIcon="eye"
-        />
+        <div class="relative">
+          <app-input-field
+            label="Confirm Password"
+            type="password"
+            placeholder="●●●●●●●●●"
+            prefixIcon="fas fa-lock"
+            suffixIcon="eye"
+            formControlName="confirmPassword"
+          />
+          <small class="block text-sm text-red-700 absolute top-0 right-0"
+            >{{getError('confirmPassword')}}</small
+          >
+        </div>
       </section>
 
       <div class="flex flex-col gap-4">
