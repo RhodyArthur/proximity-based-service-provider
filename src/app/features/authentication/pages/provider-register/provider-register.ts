@@ -6,11 +6,10 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { passwordStructureValidator } from '@shared/validators/passwordStructure';
 import { passwordMatchValidator } from '@shared/validators/passwordMatch';
 import { getControlErrorMessage } from '@shared/utils/validator-messages';
-import { ErrorMessagePipe } from '../../../../shared/pipes/error-message-pipe';
 
 @Component({
   selector: 'app-provider-register',
-  imports: [Auth, ButtonModule, InputField, ReactiveFormsModule, ErrorMessagePipe],
+  imports: [Auth, ButtonModule, InputField, ReactiveFormsModule],
   templateUrl: './provider-register.html',
   styleUrl: './provider-register.sass',
 })
