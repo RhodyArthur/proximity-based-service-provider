@@ -6,10 +6,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { getControlErrorMessage } from '@shared/utils/validator-messages';
 import { passwordMatchValidator } from '@shared/validators/passwordMatch';
 import { passwordStructureValidator } from '@shared/validators/passwordStructure';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-client-register',
-  imports: [Auth, InputField, ButtonModule, ReactiveFormsModule],
+  imports: [Auth, InputField, ButtonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './client-register.html',
   styleUrl: './client-register.sass',
 })

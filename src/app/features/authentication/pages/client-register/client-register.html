@@ -1,5 +1,5 @@
 <app-auth>
-  <main class="flex flex-col gap-8 p-4 w-full lg:w-[500px]" auth-content>
+  <main class="flex flex-col gap-8 p-4" auth-content>
     <div class="flex items-center gap-2">
       <i class="fa-solid fa-arrow-left" style="color: #0b4777"></i>
       <p class="text-blue-900">Back</p>
@@ -7,7 +7,9 @@
 
     <header class="flex flex-col">
       <h1 class="text-3xl text-black font-semibold">Register for an Account</h1>
-      <p class="text-gray-500 dark:text-gray-400">Register to get full access to our platform</p>
+      <p class="text-gray-500 dark:text-gray-400">
+        Complete your registration with us to enjoy services on our platform
+      </p>
     </header>
 
     <form class="flex flex-col gap-8" [formGroup]="registerForm">
@@ -91,7 +93,8 @@
         </button>
 
         <p class="text-base text-gray-400 text-center">
-          Already have aN account? <a class="text-blue-900 cursor-pointer">SIGN IN</a>
+          Already have an account?
+          <a class="text-blue-900 cursor-pointer" routerLink="/auth/login">SIGN IN</a>
         </p>
       </div>
     </form>
