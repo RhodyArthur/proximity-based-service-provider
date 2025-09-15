@@ -1,11 +1,18 @@
-import { Component, Input } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input-field',
   imports: [],
   templateUrl: './input-field.html',
   styleUrl: './input-field.sass',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputField),
+      multi: true,
+    },
+  ],
 })
 export class InputField implements ControlValueAccessor {
   @Input() label: string = '';
@@ -18,7 +25,7 @@ export class InputField implements ControlValueAccessor {
   @Input() onSuffixIconClick: (() => void) | null = null;
 
   value: string = '';
-  showPassword: boolean = false; // 👈 new state
+  showPassword: boolean = false;
 
   onChange = (value: string) => {};
   onTouched = () => {};
