@@ -23,6 +23,7 @@
     "@angular/router": "^20.0.0",
     "@angular/ssr": "^20.0.0",
     "@primeuix/themes": "^1.2.3",
+    "@tailwindcss/postcss": "^4.1.12",
     "express": "^5.1.0",
     "primeng": "^20.0.1",
     "rxjs": "~7.8.0",
@@ -46,6 +47,7 @@
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.17.19",
     "angular-eslint": "20.2.0",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -57,8 +59,10 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "lint-staged": "^16.1.5",
+    "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "pretty-quick": "^4.2.2",
+    "tailwindcss": "^3.4.17",
     "typescript": "~5.8.2",
     "typescript-eslint": "8.40.0"
   }

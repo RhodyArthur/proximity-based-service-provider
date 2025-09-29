@@ -6,7 +6,7 @@ const MyPreset = definePreset(Aura, {
     primary: {
       50: '#2196f3',
       100: '#424242',
-      200: '#82b1ff',
+      200: '#4b91fa',
       300: '#ff5252',
       400: '#0B4777',
       500: '#4caf50',

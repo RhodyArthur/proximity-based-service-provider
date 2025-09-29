@@ -1,0 +1,42 @@
+<main>
+  <section class="left">
+    <div class="logo">
+      <img src="./assets/logo.png" alt="fixora logo" />
+      <p>fixora</p>
+    </div>
+
+    <div class="container">
+      <ng-content select="[auth-content]" />
+    </div>
+  </section>
+
+  <section class="right">
+    <div class="carousel">
+      <div class="outer-circle">
+        <div class="inner-circle"></div>
+      </div>
+
+      <div class="review">
+        <p>{{ reviews[currentReview].text }}</p>
+        <span>{{reviews[currentReview].author}}</span>
+      </div>
+    </div>
+
+    <div class="text-indicators">
+      <div class="text-container">
+        <p>Connect with service providers worldwide</p>
+        <span>Everything you need is available here on Fixora platform</span>
+      </div>
+
+      <div class="indicators">
+        @for (review of reviews; track $index) {
+        <div
+          class="indicator"
+          [class.active]="currentReview === $index"
+          (click)="goToReview($index)"
+        ></div>
+        }
+      </div>
+    </div>
+  </section>
+</main>
