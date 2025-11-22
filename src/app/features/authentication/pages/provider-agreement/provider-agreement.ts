@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { Auth } from 'src/app/layouts/auth/auth';
 import { FormsModule } from '@angular/forms';
@@ -20,8 +20,12 @@ export class ProviderAgreement {
   private router = inject(Router);
   private location = inject(Location);
 
+  conditions = computed(
+    () => this.identityChecked() && this.licenseChecked() && this.insuranceChecked(),
+  );
+
   navigateToRegister() {
-    if (this.identityChecked() && this.licenseChecked() && this.insuranceChecked()) {
+    if (this.conditions()) {
       this.errorMessage.set('');
       this.router.navigate(['auth/provider-registration']);
     } else {

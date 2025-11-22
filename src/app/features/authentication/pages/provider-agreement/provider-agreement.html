@@ -1,8 +1,8 @@
 <app-auth>
   <main class="flex flex-col gap-8 p-4" auth-content>
-    <div class="flex items-center gap-2" (click)="goBack()">
+    <div class="flex items-center gap-2 cursor-pointer" (click)="goBack()">
       <i class="fa-solid fa-arrow-left" style="color: #0b4777"></i>
-      <p class="text-blue-900">Back</p>
+      <p class="text-[#0b4777] font-medium">Back</p>
     </div>
 
     <header class="flex flex-col">
@@ -71,7 +71,7 @@
     </section>
 
     <div class="flex flex-col gap-2">
-      <p-button label="CONTINUE" (click)="navigateToRegister()" />
+      <p-button label="CONTINUE" [disabled]="!conditions()" (click)="navigateToRegister()" />
       <p class="text-base text-gray-400 text-center">
         Already have a Provider account? <a class="text-blue-900 cursor-pointer">SIGN IN</a>
       </p>
