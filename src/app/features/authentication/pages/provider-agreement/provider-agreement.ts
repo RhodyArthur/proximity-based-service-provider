@@ -17,20 +17,29 @@ export class ProviderAgreement {
   private router = inject(Router);
   private location = inject(Location);
   store = inject(RegistrationStore);
-  errorMessage = signal('');
+  errorMessage = '';
 
-  identityChecked = this.store.identityChecked;
-  licenseChecked = this.store.licenseChecked;
-  insuranceChecked = this.store.insuranceChecked;
+  get agreement() {
+    return this.store.providerAgreement();
+  }
 
-  allConditionsChecked = this.store.allConditionsChecked;
+  get canProceed() {
+    return this.store.canProceedFromAgreement();
+  }
+
+  onCheckboxChange(
+    field: 'identityChecked' | 'licenseChecked' | 'insuranceChecked',
+    checked: boolean,
+  ) {
+    this.store.updateAgreement({ [field]: checked });
+  }
 
   navigateToRegister() {
-    if (this.allConditionsChecked()) {
-      this.errorMessage.set('');
+    if (this.canProceed) {
+      this.errorMessage = '';
       this.router.navigate(['auth/provider-registration']);
     } else {
-      this.errorMessage.set('Kindly check all conditions before proceding');
+      this.errorMessage = 'Kindly check all conditions before proceeding';
     }
   }
 

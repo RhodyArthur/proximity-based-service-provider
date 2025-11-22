@@ -17,7 +17,8 @@
           class="flex items-center gap-1 text-black text-base font-medium cursor-pointer"
         >
           <p-checkbox
-            [(ngModel)]="store.identityChecked"
+            [ngModel]="agreement?.identityChecked ?? false"
+            (ngModelChange)="onCheckboxChange('identityChecked', $event)"
             inputId="identity"
             [binary]="true"
             size="small"
@@ -35,7 +36,8 @@
           class="flex items-center gap-1 text-black text-base font-medium cursor-pointer"
         >
           <p-checkbox
-            [(ngModel)]="store.licenseChecked"
+            [ngModel]="agreement?.licenseChecked ?? false"
+            (ngModelChange)="onCheckboxChange('licenseChecked', $event)"
             inputId="license"
             [binary]="true"
             size="small"
@@ -53,7 +55,8 @@
           class="flex items-center gap-1 text-black text-base font-medium cursor-pointer"
         >
           <p-checkbox
-            [(ngModel)]="store.insuranceChecked"
+            [ngModel]="agreement?.insuranceChecked ?? false"
+            (ngModelChange)="onCheckboxChange('insuranceChecked', $event)"
             inputId="insurance"
             [binary]="true"
             size="small"
@@ -68,11 +71,7 @@
     </section>
 
     <div class="flex flex-col gap-2">
-      <p-button
-        label="CONTINUE"
-        [disabled]="!allConditionsChecked()"
-        (click)="navigateToRegister()"
-      />
+      <p-button label="CONTINUE" [disabled]="!canProceed" (click)="navigateToRegister()" />
       <p class="text-base text-gray-400 text-center">
         Already have a Provider account? <a class="text-blue-900 cursor-pointer">SIGN IN</a>
       </p>
