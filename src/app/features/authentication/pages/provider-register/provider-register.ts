@@ -7,10 +7,11 @@ import { passwordStructureValidator } from '@shared/validators/passwordStructure
 import { passwordMatchValidator } from '@shared/validators/passwordMatch';
 import { getControlErrorMessage } from '@shared/utils/validator-messages';
 import { Location } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-provider-register',
-  imports: [Auth, ButtonModule, InputField, ReactiveFormsModule],
+  imports: [Auth, ButtonModule, InputField, ReactiveFormsModule, RouterLink],
   templateUrl: './provider-register.html',
   styleUrl: './provider-register.sass',
 })
