@@ -7,6 +7,7 @@ import { getControlErrorMessage } from '@shared/utils/validator-messages';
 import { passwordMatchValidator } from '@shared/validators/passwordMatch';
 import { passwordStructureValidator } from '@shared/validators/passwordStructure';
 import { RouterLink } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-client-register',
@@ -16,6 +17,7 @@ import { RouterLink } from '@angular/router';
 })
 export class ClientRegister {
   private fb = inject(FormBuilder);
+  private location = inject(Location);
 
   registerForm: FormGroup = this.fb.group(
     {
@@ -31,5 +33,9 @@ export class ClientRegister {
   getError(controlName: string): string | null {
     const control = this.registerForm.get(controlName);
     return getControlErrorMessage(control);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
