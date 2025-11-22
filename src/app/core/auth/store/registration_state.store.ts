@@ -1,18 +1,14 @@
 import { signalStore, withState, withComputed, withMethods, patchState } from '@ngrx/signals';
 import { computed } from '@angular/core';
-
-type RegistrationState = {
-  selectedRole: 'client' | 'provider' | null;
-  identityChecked: boolean;
-  licenseChecked: boolean;
-  insuranceChecked: boolean;
-};
+import { RegistrationState } from '../models/registration-state';
+import { RegistrationFormData } from '../models/registration-form-data';
 
 const initialState: RegistrationState = {
   selectedRole: null,
-  identityChecked: false,
-  licenseChecked: false,
-  insuranceChecked: false,
+  providerAgreement: null,
+  formData: {},
+  isLoading: false,
+  error: null,
 };
 
 export const RegistrationStore = signalStore(
@@ -21,24 +17,74 @@ export const RegistrationStore = signalStore(
   withState(initialState),
 
   withComputed((store) => ({
-    allConditionsChecked: computed(
-      () => store.identityChecked() && store.licenseChecked() && store.insuranceChecked(),
-    ),
+    canProceedFromAgreement: computed(() => {
+      const agreement = store.providerAgreement();
+      if (!agreement) return false;
+
+      return agreement.identityChecked && agreement.licenseChecked && agreement.insuranceChecked;
+    }),
+
+    isProviderPath: computed(() => store.selectedRole() === 'provider'),
+    isClientPath: computed(() => store.selectedRole() === 'client'),
+
+    hasUnsavedData: computed(() => {
+      return store.selectedRole() !== null || Object.keys(store.formData()).length > 0;
+    }),
   })),
 
   withMethods((store) => ({
     setRole(role: 'client' | 'provider') {
-      patchState(store, { selectedRole: role });
+      patchState(store, {
+        selectedRole: role,
+        providerAgreement:
+          role === 'provider'
+            ? { identityChecked: false, licenseChecked: false, insuranceChecked: false }
+            : null,
+      });
     },
-    setIdentityChecked(checked: boolean) {
-      patchState(store, { identityChecked: checked });
+
+    clearRole() {
+      patchState(store, {
+        selectedRole: null,
+        providerAgreement: null,
+      });
     },
-    setLicenseChecked(checked: boolean) {
-      patchState(store, { licenseChecked: checked });
+
+    updateAgreement(
+      updates: Partial<{
+        identityChecked: boolean;
+        licenseChecked: boolean;
+        insuranceChecked: boolean;
+      }>,
+    ) {
+      const current = store.providerAgreement();
+      if (!current) return;
+
+      patchState(store, {
+        providerAgreement: { ...current, ...updates },
+      });
     },
-    setInsuranceChecked(checked: boolean) {
-      patchState(store, { insuranceChecked: checked });
+
+    saveFormData(data: Partial<RegistrationFormData>) {
+      const current = store.formData();
+      patchState(store, {
+        formData: { ...current, ...data },
+      });
     },
+
+    clearFormData() {
+      patchState(store, { formData: {} });
+    },
+
+    // UI state
+    setLoading(loading: boolean) {
+      patchState(store, { isLoading: loading });
+    },
+
+    setError(error: string | null) {
+      patchState(store, { error });
+    },
+
     resetState() {
       patchState(store, initialState);
     },
