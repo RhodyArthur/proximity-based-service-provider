@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Checkbox } from 'primeng/checkbox';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { RegistrationStore } from '@core/auth/store/registration_state.store';
 
 @Component({
   selector: 'app-provider-agreement',
@@ -13,19 +14,19 @@ import { Location } from '@angular/common';
   styleUrl: './provider-agreement.sass',
 })
 export class ProviderAgreement {
-  identityChecked = signal(false);
-  licenseChecked = signal(false);
-  insuranceChecked = signal(false);
-  errorMessage = signal('');
   private router = inject(Router);
   private location = inject(Location);
+  store = inject(RegistrationStore);
+  errorMessage = signal('');
 
-  conditions = computed(
-    () => this.identityChecked() && this.licenseChecked() && this.insuranceChecked(),
-  );
+  identityChecked = this.store.identityChecked;
+  licenseChecked = this.store.licenseChecked;
+  insuranceChecked = this.store.insuranceChecked;
+
+  allConditionsChecked = this.store.allConditionsChecked;
 
   navigateToRegister() {
-    if (this.conditions()) {
+    if (this.allConditionsChecked()) {
       this.errorMessage.set('');
       this.router.navigate(['auth/provider-registration']);
     } else {
