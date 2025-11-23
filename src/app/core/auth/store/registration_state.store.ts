@@ -1,7 +1,8 @@
 import { signalStore, withState, withComputed, withMethods, patchState } from '@ngrx/signals';
-import { computed } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { RegistrationState } from '../models/registration-state';
 import { RegistrationFormData } from '../models/registration-form-data';
+import { RegistrationStorage } from '../services/registration-storage';
 
 const initialState: RegistrationState = {
   selectedRole: null,
@@ -32,7 +33,25 @@ export const RegistrationStore = signalStore(
     }),
   })),
 
-  withMethods((store) => ({
+  withMethods((store, storageService = inject(RegistrationStorage)) => ({
+    initFromStorage() {
+      const savedState = storageService.load();
+      if (savedState) {
+        patchState(store, savedState);
+      }
+    },
+
+    _syncToStorage() {
+      const currentState: RegistrationState = {
+        selectedRole: store.selectedRole(),
+        providerAgreement: store.providerAgreement(),
+        formData: store.formData(),
+        isLoading: store.isLoading(),
+        error: store.error(),
+      };
+      storageService.save(currentState);
+    },
+
     setRole(role: 'client' | 'provider') {
       patchState(store, {
         selectedRole: role,
@@ -41,6 +60,7 @@ export const RegistrationStore = signalStore(
             ? { identityChecked: false, licenseChecked: false, insuranceChecked: false }
             : null,
       });
+      this._syncToStorage();
     },
 
     clearRole() {
@@ -48,6 +68,7 @@ export const RegistrationStore = signalStore(
         selectedRole: null,
         providerAgreement: null,
       });
+      this._syncToStorage();
     },
 
     updateAgreement(
@@ -63,6 +84,7 @@ export const RegistrationStore = signalStore(
       patchState(store, {
         providerAgreement: { ...current, ...updates },
       });
+      this._syncToStorage();
     },
 
     saveFormData(data: Partial<RegistrationFormData>) {
@@ -70,10 +92,12 @@ export const RegistrationStore = signalStore(
       patchState(store, {
         formData: { ...current, ...data },
       });
+      this._syncToStorage();
     },
 
     clearFormData() {
       patchState(store, { formData: {} });
+      this._syncToStorage();
     },
 
     // UI state
@@ -87,6 +111,9 @@ export const RegistrationStore = signalStore(
 
     resetState() {
       patchState(store, initialState);
+      storageService.clear();
     },
   })),
 );
+
+export type RegistrationStoreInstance = InstanceType<typeof RegistrationStore>;
