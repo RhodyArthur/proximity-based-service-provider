@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { RegistrationStore } from '@core/auth/store/registration_state.store';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -10,7 +11,9 @@ import { ButtonModule } from 'primeng/button';
 })
 export class RoleSelection {
   private router = inject(Router);
-  selectedRole = signal<'client' | 'provider' | null>(null);
+  store = inject(RegistrationStore);
+
+  selectedRole = this.store.selectedRole;
 
   roles = [
     {
@@ -28,13 +31,15 @@ export class RoleSelection {
   ];
 
   selectRole(role: 'client' | 'provider') {
-    this.selectedRole.set(role);
+    this.store.setRole(role);
   }
 
   navigateToNext() {
-    if (this.selectedRole() === 'client') {
+    const role = this.store.selectedRole();
+
+    if (role == 'client') {
       this.router.navigate(['/auth/client-registration']);
-    } else if (this.selectedRole() === 'provider') {
+    } else if (role === 'provider') {
       this.router.navigate(['/auth/provider-agreement']);
     }
   }

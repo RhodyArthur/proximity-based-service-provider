@@ -1,4 +1,4 @@
-<main class="flex flex-col gap-8 w-full lg:w-[460px]">
+<main class="flex flex-col gap-8 w-full lg:w-[480px]">
   <header class="flex flex-col">
     <h1 class="text-[40px] text-black font-semibold">Select Your Role</h1>
     <p class="text-gray-500 dark:text-gray-400">Select a role and continue to sign up</p>
@@ -24,7 +24,7 @@
   </section>
 
   <div class="flex flex-col gap-2">
-    <p-button label="CONTINUE" (click)="navigateToNext()" />
+    <p-button label="CONTINUE" (click)="navigateToNext()" [disabled]="selectedRole() == null" />
     <p class="text-base text-gray-400 text-center">
       Already have an account? <a class="text-blue-900 cursor-pointer">SIGN IN</a>
     </p>

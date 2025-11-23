@@ -24,11 +24,13 @@ main
     .left
         @include flex-option(flex, flex-start, flex-start, column)
         background-color: white
+        overflow: hidden
 
         .logo
             @include flex-option(flex, space-between, center, row)
             gap: 0.5rem
             padding: 1rem 2.5rem
+            flex-shrink: 0
 
             p
                 font-size: 1rem
@@ -39,10 +41,19 @@ main
         .container
             @include flex-option(flex, center, center, column)
             width: 100%
-            height: 100%
+            flex: 1
+            overflow-y: auto
+            overflow-x: hidden
+
+            &::-webkit-scrollbar
+                display: none
+            
+            -ms-overflow-style: none
+            scrollbar-width: none
 
             ng-content
                 width: 100%
+                min-height: min-content
                 
 
     .right

@@ -1,15 +1,16 @@
 @use './../../../../styles/_variables' as *
 
-::ng-deep .p-button
-    width: 100%
-    background: $primary
-    border: $primary !important
+::ng-deep .p-checkbox-box
+    background: white 
+    border-color: $primary !important
 
-::ng-deep .p-button:not(:disabled):hover
-    background: $blue
+::ng-deep .p-checkbox-input:checked ~ .p-checkbox-box
+    background: $primary !important
 
-::ng-deep .p-button-label
-    color: white
+::ng-deep .p-checkbox:not(.p-disabled):has(.p-checkbox-input:hover:not(:checked)) .p-checkbox-box
+    background: transparent 
+    border-width: 2px
+    border-color: $blue !important
 
-::ng-deep .p-checkbox-input:checked
-    color: white
+::ng-deep .p-checkbox-icon
+    color: white !important
